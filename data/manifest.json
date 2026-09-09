@@ -1,0 +1,419 @@
+{
+  "base_snapshot_date": "2026-07-13",
+  "base_source_manifest_sha256": "1f3314f27d8fdcca05652091aee2223edfabbdfff999fd32bd973cbba97c72d0",
+  "base_source_schema_version": 6,
+  "counts": {
+    "rejected": 868,
+    "search": 370617,
+    "total": 371485
+  },
+  "excluded_sources": [
+    "VulnCheck service/feed enrichments",
+    "Sigma",
+    "OSV",
+    "CAPEC",
+    "MITRE ATT&CK"
+  ],
+  "format": "portable-cve-rag",
+  "lifecycle_counts": {
+    "PUBLISHED": 370617,
+    "REJECTED": 868
+  },
+  "partitioning": "cve-id-year",
+  "raw_cvelist_records_joined": 371485,
+  "record_contract": {
+    "max_metadata_bytes": 39000,
+    "max_stored_metadata_bytes": 39000,
+    "max_text_characters": 9000,
+    "max_text_utf8_bytes": 8192,
+    "metadata_values": "string, number, boolean, or list of strings",
+    "top_level_keys": [
+      "id",
+      "metadata",
+      "text"
+    ]
+  },
+  "rejected_file": {
+    "bytes": 494896,
+    "first_id": "CVE-2022-49267",
+    "last_id": "CVE-2026-86477",
+    "path": "data/rejected.json",
+    "record_count": 868,
+    "sha256": "1fea0e7d0004915bfe5c94657de77fc83b65e4975936f4df621f52f1c88600e0",
+    "snapshot_scope": "2026 records refreshed to 2026-09-09; earlier CVE years retain the 2026-07-13 snapshot"
+  },
+  "schema_version": 2,
+  "search_files": [
+    {
+      "bytes": 2535391,
+      "first_id": "CVE-1999-0001",
+      "last_id": "CVE-1999-1593",
+      "path": "data/CVE-1999.json",
+      "record_count": 1540,
+      "sha256": "04e580f7f55fb7fbe25adcefa8b5fbd44ea3c94d2e004b7764a108cf4e66dc46",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 2201080,
+      "first_id": "CVE-2000-0001",
+      "last_id": "CVE-2000-1254",
+      "path": "data/CVE-2000.json",
+      "record_count": 1236,
+      "sha256": "ba3d9c83fbb87940d615750be9cd672c9d7422ac81cf17a2759cb20747291dfe",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 2813911,
+      "first_id": "CVE-2001-0001",
+      "last_id": "CVE-2001-1594",
+      "path": "data/CVE-2001.json",
+      "record_count": 1537,
+      "sha256": "c70bc31d1b79c4ba9d627da2cc8ca4eefec88b15c576a6b4b3b7c361488fa435",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 4452470,
+      "first_id": "CVE-2002-0001",
+      "last_id": "CVE-2002-20002",
+      "path": "data/CVE-2002.json",
+      "record_count": 2357,
+      "sha256": "ee7e6118f7755c0c49fd8fa943728db243069739b88dcce4eef3ee650f4840bc",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 2901339,
+      "first_id": "CVE-2003-0001",
+      "last_id": "CVE-2003-20001",
+      "path": "data/CVE-2003.json",
+      "record_count": 1504,
+      "sha256": "280e6ed8c4307b4d529b8e9dea95bcf91d560d77c00fbdf0545c3909fbd4f649",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 5198666,
+      "first_id": "CVE-2004-0001",
+      "last_id": "CVE-2004-2779",
+      "path": "data/CVE-2004.json",
+      "record_count": 2644,
+      "sha256": "b0f27c18c2508f438a46410dff4ab81abf85b6ada5f7345d83a990671f418a94",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 8971983,
+      "first_id": "CVE-2005-0001",
+      "last_id": "CVE-2005-10004",
+      "path": "data/CVE-2005.json",
+      "record_count": 4627,
+      "sha256": "5bec422f742a40db877e51ddcd88523d10ea8643987d3eb3449387f60191ffb4",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 14381116,
+      "first_id": "CVE-2006-0001",
+      "last_id": "CVE-2006-20001",
+      "path": "data/CVE-2006.json",
+      "record_count": 6995,
+      "sha256": "5a86517a963f92d036da00c499ecca5eed3ccbc078378bfd4ed00382c6db6dd6",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 13518811,
+      "first_id": "CVE-2007-0001",
+      "last_id": "CVE-2007-20001",
+      "path": "data/CVE-2007.json",
+      "record_count": 6458,
+      "sha256": "e45becaf54531cd5c46623b2b54c90ee1045f04be0c28534b8d408b57ba1604e",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 14974421,
+      "first_id": "CVE-2008-0001",
+      "last_id": "CVE-2008-20001",
+      "path": "data/CVE-2008.json",
+      "record_count": 7005,
+      "sha256": "fdd813afe9755834b24b34366e636c82d50524862a2fe9ec72a667bb1b03ecfa",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 10509976,
+      "first_id": "CVE-2009-0001",
+      "last_id": "CVE-2009-20011",
+      "path": "data/CVE-2009.json",
+      "record_count": 4921,
+      "sha256": "5f509681889b972bdbf108a7f774842b8a139766fd3a69a96446ca5b5b695fb1",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 10882536,
+      "first_id": "CVE-2010-0001",
+      "last_id": "CVE-2010-20123",
+      "path": "data/CVE-2010.json",
+      "record_count": 5074,
+      "sha256": "4f3c862529be2a72c43d84ad385fea8cfbb92f1595b2ae3de04822b24ff8caf7",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 9827496,
+      "first_id": "CVE-2011-0001",
+      "last_id": "CVE-2011-20002",
+      "path": "data/CVE-2011.json",
+      "record_count": 4646,
+      "sha256": "b306d0cec4f71c43373842bc662b38cb5b9b203976da7f57c1920f3a87906636",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 11592203,
+      "first_id": "CVE-2012-0001",
+      "last_id": "CVE-2012-20001",
+      "path": "data/CVE-2012.json",
+      "record_count": 5488,
+      "sha256": "4cedb9666bbbe97fb6cac68418990c42680714cf221cbeb71509bdcc81a91cc5",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 12858662,
+      "first_id": "CVE-2013-0001",
+      "last_id": "CVE-2013-20006",
+      "path": "data/CVE-2013.json",
+      "record_count": 6221,
+      "sha256": "4e724c047ce4e42687a8dc0772adddfcf0cadb50bc542cc034dc50126d62186b",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 17373989,
+      "first_id": "CVE-2014-0001",
+      "last_id": "CVE-2014-125128",
+      "path": "data/CVE-2014.json",
+      "record_count": 8427,
+      "sha256": "3fc143551b060f5940c3fbaa1903a24b42eb5c0b943981b5ed5d17ca03f59574",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 17247643,
+      "first_id": "CVE-2015-0001",
+      "last_id": "CVE-2015-1142857",
+      "path": "data/CVE-2015.json",
+      "record_count": 8111,
+      "sha256": "579b566cbf2c1a219182b7d92f07843b5a023c10532b1faafd3d34a95b4135b4",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 21262036,
+      "first_id": "CVE-2016-0002",
+      "last_id": "CVE-2016-1000352",
+      "path": "data/CVE-2016.json",
+      "record_count": 9365,
+      "sha256": "bff79ee44eca33cfcff920bdbaa3f75d9ca42067a43fb43607a17254a0897af5",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 34979062,
+      "first_id": "CVE-2017-0001",
+      "last_id": "CVE-2017-1002201",
+      "path": "data/CVE-2017.json",
+      "record_count": 14760,
+      "sha256": "5cafcf5349c79a805d16567645a1a3671c6a07542587e341a71bd5fd956665a3",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 38404160,
+      "first_id": "CVE-2018-0001",
+      "last_id": "CVE-2018-1999047",
+      "path": "data/CVE-2018.json",
+      "record_count": 16188,
+      "sha256": "63abb6eafbcd66aea4a0f41a45c2d89a02dd6a52b5ba7f7e059c0b2bb1b2366c",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 40381689,
+      "first_id": "CVE-2019-0001",
+      "last_id": "CVE-2019-1020019",
+      "path": "data/CVE-2019.json",
+      "record_count": 16093,
+      "sha256": "cbc1baf2c2872637f0669b7aeb1d0c92b94d7bccef0e51242f2aed6e254531c9",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 49412144,
+      "first_id": "CVE-2020-0001",
+      "last_id": "CVE-2020-37256",
+      "path": "data/CVE-2020.json",
+      "record_count": 19386,
+      "sha256": "d1cf955a3c1e43cd943d61a8586eabf9ffd8593564441cdc1f526788d67e7d29",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 58636774,
+      "first_id": "CVE-2021-0001",
+      "last_id": "CVE-2021-47987",
+      "path": "data/CVE-2021.json",
+      "record_count": 22586,
+      "sha256": "a1024cc631ff2f56b3846b20db57a7b45aa7adfb87f62a5a05eee9a6f36118e6",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 72100996,
+      "first_id": "CVE-2022-0001",
+      "last_id": "CVE-2022-50994",
+      "path": "data/CVE-2022.json",
+      "record_count": 26425,
+      "sha256": "6c71366a3daacc3714fc76ab0133ab506c0f7dabcd8aba9b60c0f37718fa4018",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 86649245,
+      "first_id": "CVE-2023-0001",
+      "last_id": "CVE-2023-54365",
+      "path": "data/CVE-2023.json",
+      "record_count": 30597,
+      "sha256": "77f8f6990c87107dd627d84993e56f0651aefdc21ed813ae79bd6f71740bdc8e",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 115277450,
+      "first_id": "CVE-2024-0001",
+      "last_id": "CVE-2024-58352",
+      "path": "data/CVE-2024.json",
+      "record_count": 38388,
+      "sha256": "527569710610e6340e432904691fda743173c8f4d3ca9eae6cdecba28d26d5b3",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 130406009,
+      "first_id": "CVE-2025-0001",
+      "last_id": "CVE-2025-71385",
+      "path": "data/CVE-2025.json",
+      "record_count": 43176,
+      "sha256": "e19457811a5fbf45e48e457d32aac6cf4ca12ef9f930b44628b678c2bffe3285",
+      "snapshot_date": "2026-07-13"
+    },
+    {
+      "bytes": 273285866,
+      "cve_source_cutoff": "2026-09-09T14:42:39Z",
+      "first_id": "CVE-2026-0001",
+      "last_id": "CVE-2026-87877",
+      "path": "data/CVE-2026.json",
+      "record_count": 54862,
+      "sha256": "ed395ea7ff92f31d4bd799c93b3784835b2f41e2f96ddb73b3454e874e245168",
+      "snapshot_date": "2026-09-09"
+    }
+  ],
+  "storage_format": "json-array",
+  "year_refreshes": {
+    "2026": {
+      "bounded_text_records": 14354,
+      "change_from_base": {
+        "previously_published_now_rejected": 21,
+        "published_records_added": 23401
+      },
+      "coverage": {
+        "cisa_kev_matched": 137,
+        "cvss_missing": 1348,
+        "epss_matched": 54732,
+        "epss_missing": 130,
+        "missing_vendor_or_product": 3203,
+        "nvd_matched": 54853,
+        "nvd_missing": 9,
+        "published": 54862,
+        "rejected": 841
+      },
+      "cve_source_cutoff": "2026-09-09T14:42:39Z",
+      "omitted_list_entries": {
+        "affected_products": 5782,
+        "affected_ranges": 46952,
+        "configurations": 2,
+        "nvd_applicability_conditions": 6048,
+        "products": 5455,
+        "references": 588,
+        "solutions": 721,
+        "unaffected_products": 5246,
+        "unaffected_ranges": 26622,
+        "unknown_ranges": 913,
+        "workarounds": 4
+      },
+      "policies": {
+        "bounds": "max text 8000 UTF-8 bytes; max metadata including text and cve_id 39000 bytes; list overflow counts explicit; text truncation explicit",
+        "cohort": "exact pinned CVEProject 2026 PUBLISHED and REJECTED partitions",
+        "cvss": "CNA then ADP; NVD only when both have no CVSS. Highest version within provider tier, deterministic provider tie-break. Other CVE assessments retained where bounded.",
+        "cwe": "CNA plus ADP; NVD fallback if no explicit CWE code",
+        "description": "CNA English preferred; NVD fallback only if absent",
+        "legacy_enrichment": "no prior inferred classification or specialized exploit-index mappings retained",
+        "nvd_configurations": "boolean AND/OR/negate preserved; vulnerable:false is not converted to globally unaffected",
+        "remediation": "CNA plus ADP solutions and workarounds; has_solution_guidance and has_workaround_guidance indicate source field presence, not availability of a working fix",
+        "version_status": "status changes preserved in explicit source rules; defaults only outside listed entries; unaffected does not mean fixed"
+      },
+      "sources": {
+        "cve": {
+          "date": "2026-09-09T14:42:39Z",
+          "path": "cves/2026",
+          "repository": "https://github.com/CVEProject/cvelistV5",
+          "sha": "4b39227ea1061a7bc8028b8e530abd53556d21e1",
+          "tree": "a314507a589642c3f10b68d92093bf5a06acb7ad"
+        },
+        "epss": {
+          "download_bytes": 2614429,
+          "download_sha256": "955465ed28325d87d2d51d8e60533f8240ba819b78ba7d2dc8e4edab04d9d3f3",
+          "header": "#model_version:v2026.06.15,score_date:2026-09-09T12:00:22Z",
+          "last_modified_http": "Wed, 09 Sep 2026 13:30:22 GMT",
+          "url": "https://epss.empiricalsecurity.com/epss_scores-2026-09-09.csv.gz"
+        },
+        "kev": {
+          "catalog_version": "2026.09.08",
+          "count": 1699,
+          "date_released": "2026-09-08T18:00:21.1079Z",
+          "download_bytes": 1703459,
+          "download_sha256": "431304df5857a5a7517b00993fdafebbd2158577b6854bd51910bb7d8752b1fa",
+          "last_modified_http": null,
+          "url": "https://raw.githubusercontent.com/cisagov/kev-data/806590800e8eed8276e1e76dabf5c1f72a1fddc7/known_exploited_vulnerabilities.json",
+          "year2026_count": 137
+        },
+        "nvd-2026": {
+          "download_bytes": 28050755,
+          "download_sha256": "db0b0a4c9c8a48ceaada83ad03746848fe0b962c2add80c4d5265d74a6a89192",
+          "last_modified_http": "Wed, 09 Sep 2026 07:15:16 GMT",
+          "meta": {
+            "gzSize": "28050755",
+            "lastModifiedDate": "2026-09-09T03:00:18-04:00",
+            "sha256": "DF58306145DA646C0D53A5F29379818BB4D170F31CB465EF31115C940763A440",
+            "size": "337567382",
+            "zipSize": "28050891"
+          },
+          "uncompressed_sha256": "df58306145da646c0d53a5f29379818bb4d170f31cb465ef31115c940763a440",
+          "url": "https://nvd.nist.gov/feeds/json/cve/2.0/nvdcve-2.0-2026.json.gz"
+        },
+        "nvd-live-window": {
+          "download_bytes": 594267,
+          "download_sha256": "cf022accb5aab83d979f5463587c5061a7be94a4aee1637ab5e540c679efa693",
+          "record_count": 196,
+          "response_timestamp": "2026-09-09T14:56:07.792",
+          "url": "https://services.nvd.nist.gov/rest/json/cves/2.0?lastModStartDate=2026-09-09T14%3A00%3A06.000&lastModEndDate=2026-09-09T14%3A42%3A39.000&resultsPerPage=2000",
+          "window_end": "2026-09-09T14:42:39Z",
+          "window_start": "2026-09-09T14:00:06Z"
+        },
+        "nvd-modified": {
+          "download_bytes": 4157546,
+          "download_sha256": "14f0bff0e89e968e96d7080a118075f6cac2a1bca02809dbfd540687db814940",
+          "last_modified_http": "Wed, 09 Sep 2026 14:00:12 GMT",
+          "meta": {
+            "gzSize": "4157546",
+            "lastModifiedDate": "2026-09-09T10:00:06-04:00",
+            "sha256": "4476AA4CECF0FE25EBB26C3203003CF4DF416797EBF46DB2E53D474DF42095E3",
+            "size": "59514909",
+            "zipSize": "4157690"
+          },
+          "uncompressed_sha256": "4476aa4cecf0fe25ebb26c3203003cf4df416797ebf46db2e53d474df42095e3",
+          "url": "https://nvd.nist.gov/feeds/json/cve/2.0/nvdcve-2.0-modified.json.gz"
+        }
+      },
+      "transformer_sha256": "441350b00cc3f4e14e7a4c6c26a79e928bf06cfa0b160afccb6e0c2af1d15cf9",
+      "validation": {
+        "max_stored_metadata_bytes": 35964,
+        "max_text_utf8_bytes": 6174,
+        "numeric_cve_order": true,
+        "published_id_set_matches_cve_source": true,
+        "rejected_id_set_matches_cve_source": true,
+        "source_epss_and_kev_values_match": true
+      }
+    }
+  }
+}

@@ -1,184 +1,83 @@
-# CVE RAG System
+# Portable CVE RAG
 
-A vector database for semantic search across 280,000+ Common Vulnerabilities and Exposures (CVE) records. Built with Pinecone and OpenAI embeddings.
+A portable CVE corpus for semantic retrieval. It contains one bounded record per CVE, no embeddings, no audit output, no updater framework, and only the two Python programs needed to create and load a Pinecone index.
 
----
+The canonical files in [`data/`](data/README.md) contain 370,617 searchable CVEs in 28 readable JSON files, grouped by CVE ID year from `1999` through `2026`. Another 868 rejected CVEs are retained separately and never uploaded. `data/manifest.json` records counts, byte sizes, SHA-256 checksums, and source cutoffs.
 
-## Overview
+The `1999`–`2025` files retain the `2026-07-13` snapshot. The `2026` file contains 54,862 published CVEs, with CVE and NVD data checked through `2026-09-09T14:42:39Z`, EPSS scores dated September 9 at `12:00:22Z`, and CISA KEV catalog `2026.09.08`, released September 8. Source dates are distinct; see the manifest for exact revisions and coverage.
 
-This repository provides pre-processed CVE data enriched with threat intelligence from multiple sources. Run two scripts to create a fully searchable vector database for vulnerability research, security automation, and RAG applications.
+## Record contract
 
----
+Each `data/CVE-YYYY.json` file contains an indented JSON array of record objects:
 
-## Data Coverage
+```json
+[
+  {
+    "id": "CVE-2024-3400",
+    "text": "CVE-2024-3400 ...",
+    "metadata": {
+      "state": "PUBLISHED",
+      "vendors": ["palo_alto_networks"],
+      "products": ["pan-os"],
+      "cwes": ["CWE-20", "CWE-77"],
+      "cvss_score": 10.0,
+      "cisa_kev": true,
+      "has_fix": true
+    }
+  }
+]
+```
 
-| Metric | Value |
-|--------|-------|
-| CVE Records | 280,000+ |
-| Date Range | 1999 - 2025 |
-| Data Sources | NVD, CISA KEV, EPSS, ExploitDB, Metasploit |
+`text` is the passage to embed and give to the model. `metadata` is flat and uses only Pinecone-safe strings, numbers, booleans, and string lists, so the same files can also be loaded into another vector database.
 
----
+The text contains vulnerability descriptions and titles, affected and explicitly unaffected products/ranges, configuration prerequisites, CVSS/access conditions, weaknesses, remediation, workarounds, and references where available. The 2026 refresh includes current KEV and EPSS data but omits legacy exploit-index fields and inferred classifications. An absent optional field means unavailable or unassessed, not a negative result. The 2026 records are bounded summaries: `text_truncated` and `*_overflow_count` identify omissions, and source links provide the full advisories. `has_solution_guidance` and `has_workaround_guidance` indicate that source text exists; they do not assert that a fix or workaround is available.
 
-## CVE Data Schema
+## Download the data
 
-Each CVE record contains the following fields:
-
-### Core Fields
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | CVE identifier (e.g., CVE-2024-0012) |
-| `embedding_input` | string | Full description text used for vector embedding |
-| `datePublished` | string | Publication date (YYYY-MM-DD) |
-| `cweId` | string | Common Weakness Enumeration ID |
-
-### CVSS v3.1 Metrics
-
-| Field | Type | Values |
-|-------|------|--------|
-| `baseScore` | float | 0.0 - 10.0 |
-| `baseSeverity` | string | CRITICAL, HIGH, MEDIUM, LOW |
-| `attackVector` | string | NETWORK, ADJACENT_NETWORK, LOCAL, PHYSICAL |
-| `attackComplexity` | string | LOW, HIGH |
-| `privilegesRequired` | string | NONE, LOW, HIGH |
-| `userInteraction` | string | NONE, REQUIRED |
-| `scope` | string | UNCHANGED, CHANGED |
-| `confidentialityImpact` | string | NONE, LOW, HIGH |
-| `integrityImpact` | string | NONE, LOW, HIGH |
-| `availabilityImpact` | string | NONE, LOW, HIGH |
-
-### Threat Intelligence
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `inCisaKev` | boolean | Listed in CISA Known Exploited Vulnerabilities catalog |
-| `kevDateAdded` | string | Date added to KEV catalog |
-| `kevDueDate` | string | Federal remediation deadline |
-| `kevRansomwareUse` | string | Known ransomware campaign usage |
-| `epssScore` | float | Exploit Prediction Scoring System probability (0-1) |
-| `epssPercentile` | float | EPSS percentile rank (0-1) |
-
-### Exploit Information
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `hasPublicExploit` | boolean | Public exploit code exists (ExploitDB) |
-| `exploitCount` | integer | Number of public exploits available |
-| `hasMetasploitModule` | boolean | Metasploit module available |
-| `metasploitModuleCount` | integer | Number of Metasploit modules |
-| `metasploitModules` | array | Module details (path, name, type, rank, platforms) |
-
----
-
-## Quick Start
-
-### Prerequisites
-
-- Python 3.7+
-- OpenAI API key ([get one here](https://platform.openai.com/))
-- Pinecone API key ([get one here](https://www.pinecone.io/))
-
-### Installation
+Install [Git LFS](https://git-lfs.com/) before cloning. The yearly JSON files use Git LFS for storage and remain readable JSON in your checkout.
 
 ```bash
-git clone https://github.com/your-username/CVE_RAG.git
+git lfs install
+git clone https://github.com/OpensourceTactician/CVE_RAG.git
 cd CVE_RAG
-pip install pinecone openai python-dotenv
+git lfs pull
 ```
 
-### Configuration
+Allow about 1.1 GB for the data, plus Git's local LFS cache. Use this clone workflow to retrieve the complete files; a checkout made without Git LFS may contain small pointer files instead of JSON. If you already cloned the repository, run `git lfs install` and `git lfs pull` inside it.
 
-Create a `.env` file in the project root:
+## Create and upload
 
-```
-OPENAI_API_KEY=sk-...
-PINECONE_API_KEY=...
-```
-
-Or export as environment variables:
+Python 3.10 or newer is required. Dependencies are pinned to the versions used in local validation.
 
 ```bash
-# Linux/macOS
-export OPENAI_API_KEY="sk-..."
-export PINECONE_API_KEY="..."
-
-# Windows PowerShell
-$env:OPENAI_API_KEY="sk-..."
-$env:PINECONE_API_KEY="..."
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+python upload_to_pinecone.py --dry-run
 ```
 
-### Create the Database
-
-**Step 1:** Initialize the Pinecone index
+The dry run uses no API keys or network. To create a hosted index, add your OpenAI and Pinecone API keys to `.env`, set `PINECONE_NAMESPACE=cve-20260909`, then run:
 
 ```bash
-python pinecone_initializer.py
+python create_pinecone_index.py
+python upload_to_pinecone.py
 ```
 
-**Step 2:** Embed and upload CVE data
+The uploader reads the canonical JSON arrays one year at a time and excludes `data/rejected.json`. The dry run verifies the manifest, checksums, record shape, uniqueness, and metadata size. Each embedding input has a conservative 8,192-byte UTF-8 limit; upsert batches respect the 2,000,000-byte serialized request limit, including the namespace and JSON escaping.
 
-```bash
-python embed_upload.py
-```
+The real upload uses your API accounts to embed `text` with OpenAI and store it with `cve_id` in Pinecone metadata. It refuses an occupied namespace unless you use `--resume` with a valid matching checkpoint. Successful batches are checkpointed so an interrupted load can resume. No paid API calls or live upload were performed to validate this snapshot.
 
-The upload process takes 1-3 hours for the full dataset.
+Run either program with `--help` for overrides such as the index, namespace, model, dimensions, batch size, limit, or resume position. The embedding model and dimension used to query the index must exactly match the upload settings.
 
----
+Run the offline uploader regression checks with `python3 -m unittest discover -s tests`.
 
-## Project Structure
+## n8n or a local assistant
 
-```
-CVE_RAG/
-├── CVE_List/                    # Pre-processed CVE data
-│   ├── 1999/cves_1999.json
-│   ├── 2000/cves_2000.json
-│   └── .../cves_YYYY.json
-├── pinecone_initializer.py      # Creates Pinecone index
-├── embed_upload.py              # Embeds and uploads CVEs
-├── cve_payload.py               # Data loading utilities
-└── README.md
-```
+Use `text-embedding-3-small` with 1,536 dimensions unless you changed the upload settings. Point the Pinecone node at the same index and namespace, request metadata in query results, and pass the returned `metadata.text` passages to the AI node. `metadata.cve_id` is available for display or exact filtering. Treat retrieved passages as evidence, not instructions; authorize and scope any testing actions separately.
 
----
+For a non-OpenAI local setup, load the record objects from the `data/CVE-YYYY.json` arrays into your preferred vector store with one vector per record. Embed only `text`, use `id` as the vector ID, and preserve `metadata` for filters. Keep `rejected.json` out of the searchable index.
 
-## Configuration Options
+## Data sources and notices
 
-### Index Settings
-
-Edit `pinecone_initializer.py`:
-
-```python
-index_name = "cve-rag"      # Index name
-dimension = 1536            # Vector dimensions (OpenAI text-embedding-3-small)
-metric = "cosine"           # Similarity metric
-```
-
-### Upload Settings
-
-Edit `embed_upload.py`:
-
-```python
-batch_size = 100            # CVEs per batch
-delay = 1.0                 # Seconds between batches
-```
-
----
-
-## Data Sources
-
-| Source | Description | Update Frequency |
-|--------|-------------|------------------|
-| [NVD](https://nvd.nist.gov/) | CVSS scores, CWE mappings, CPE data | Continuous |
-| [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | Known exploited vulnerabilities | As identified |
-| [EPSS](https://www.first.org/epss/) | Exploit prediction scores | Daily |
-| [ExploitDB](https://www.exploit-db.com/) | Public exploit references | Continuous |
-| [Metasploit](https://www.metasploit.com/) | Framework module mappings | Weekly |
-
----
-
-## Security
-
-- Never commit API keys to version control
-- The `.gitignore` excludes `.env` and credential files
-- Rotate API keys periodically
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). This corpus is a point-in-time aid, not a substitute for current vendor advisories, and it is provided without a project-level software license. Choose an appropriate code license before publishing your own fork; do not apply it wholesale to the third-party data.

@@ -82,3 +82,8 @@ enrichment_cache/
 
 # CVE source data (if downloaded locally)
 cvelistV5/
+
+# Portable corpus upload
+.venv/
+.upload-checkpoint.json
+.upload-checkpoint.json.tmp
