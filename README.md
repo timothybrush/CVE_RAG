@@ -2,9 +2,11 @@
 
 A portable CVE corpus for semantic retrieval. It contains one bounded record per CVE, no embeddings, no audit output, no updater framework, and only the two Python programs needed to create and load a Pinecone index.
 
-The canonical files in [`data/`](data/README.md) contain 370,617 searchable CVEs in 28 readable JSON files, grouped by CVE ID year from `1999` through `2026`. Another 868 rejected CVEs are retained separately and never uploaded. `data/manifest.json` records counts, byte sizes, SHA-256 checksums, and source cutoffs.
+The canonical files in [`data/`](data/README.md) contain 377,103 searchable CVEs in 28 readable JSON files, grouped by CVE ID year from `1999` through `2026`. Another 868 rejected CVEs are retained separately and never uploaded. `data/manifest.json` records counts, byte sizes, SHA-256 checksums, source cutoffs, and incremental additions.
 
-The `1999`–`2025` files retain the `2026-07-13` snapshot. The `2026` file contains 54,862 published CVEs, with CVE and NVD data checked through `2026-09-09T14:42:39Z`, EPSS scores dated September 9 at `12:00:22Z`, and CISA KEV catalog `2026.09.08`, released September 8. Source dates are distinct; see the manifest for exact revisions and coverage.
+The September 21 update adds **6,486 newly published CVEs** from after `2026-09-09T14:42:39Z` through `2026-09-21T21:13:12Z`. Existing records are unchanged: the original `1999`–`2025` records retain the July 13 snapshot, and the previously refreshed `2026` records retain the September 9 snapshot. New publications are grouped by their CVE ID year, even when that year is older. Weekly updates add new publications only.
+
+For the new additions, CVE and NVD data were checked through `2026-09-21T21:13:12Z`, EPSS was scored at `2026-09-21T12:03:23Z`, and KEV catalog `2026.09.21` was released at `2026-09-21T18:46:35.0873Z`. NVD enrichment is unavailable for 50 additions and EPSS for 216; those fields remain absent. Existing records are not revalidated against newer source statuses or enrichment during incremental updates.
 
 ## Record contract
 
@@ -21,8 +23,7 @@ Each `data/CVE-YYYY.json` file contains an indented JSON array of record objects
       "products": ["pan-os"],
       "cwes": ["CWE-20", "CWE-77"],
       "cvss_score": 10.0,
-      "cisa_kev": true,
-      "has_fix": true
+      "cisa_kev": true
     }
   }
 ]
@@ -30,7 +31,7 @@ Each `data/CVE-YYYY.json` file contains an indented JSON array of record objects
 
 `text` is the passage to embed and give to the model. `metadata` is flat and uses only Pinecone-safe strings, numbers, booleans, and string lists, so the same files can also be loaded into another vector database.
 
-The text contains vulnerability descriptions and titles, affected and explicitly unaffected products/ranges, configuration prerequisites, CVSS/access conditions, weaknesses, remediation, workarounds, and references where available. The 2026 refresh includes current KEV and EPSS data but omits legacy exploit-index fields and inferred classifications. An absent optional field means unavailable or unassessed, not a negative result. The 2026 records are bounded summaries: `text_truncated` and `*_overflow_count` identify omissions, and source links provide the full advisories. `has_solution_guidance` and `has_workaround_guidance` indicate that source text exists; they do not assert that a fix or workaround is available.
+The text contains vulnerability descriptions and titles, affected and explicitly unaffected products/ranges, configuration prerequisites, CVSS/access conditions, weaknesses, remediation, workarounds, and references where available. The September 9 refresh of 2026 records and subsequent additions omit legacy exploit-index fields and inferred classifications. Older existing records keep their prior fields and source dates. An absent optional field means unavailable or unassessed, not a negative result. The records are bounded summaries: `text_truncated` and `*_overflow_count` identify omissions, and source links provide the full advisories. `has_solution_guidance` and `has_workaround_guidance` indicate that source text exists; they do not assert that a fix or workaround is available.
 
 ## Download the data
 
@@ -57,7 +58,7 @@ cp .env.example .env
 python upload_to_pinecone.py --dry-run
 ```
 
-The dry run uses no API keys or network. To create a hosted index, add your OpenAI and Pinecone API keys to `.env`, set `PINECONE_NAMESPACE=cve-20260909`, then run:
+The dry run uses no API keys or network. To create a hosted index, add your OpenAI and Pinecone API keys to `.env`, set `PINECONE_NAMESPACE=cve-20260921`, then run:
 
 ```bash
 python create_pinecone_index.py
